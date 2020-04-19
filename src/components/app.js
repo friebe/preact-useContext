@@ -8,7 +8,7 @@ import Home from '../routes/home';
 import Profile from '../routes/profile';
 import Warenkorb from '../routes/warenkorb';
 import Produkte from '../routes/produkte'
-import ShopContext from '../context/shop-context'
+import GlobalState from '../context/GlobalState'
 
 export default class App extends Component {
 
@@ -20,20 +20,10 @@ export default class App extends Component {
 		this.currentUrl = e.url;
 	};
 
-	state = {
-		products: [
-			{id: "p1", title: "Gaming Mouse", price: 29.99}
-		],
-		cart:[]
-	}
-
-
 	render() {
 		return (
 			<div id="app">
-			<ShopContext.Provider value={{
-				products:this.state.products
-			}}>
+			<GlobalState>
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
@@ -42,7 +32,7 @@ export default class App extends Component {
 					<Warenkorb path="/warenkorb" />
 					<Produkte path="/produkte" />
 				</Router>
-			</ShopContext.Provider>
+			</GlobalState>
 			</div>
 		);
 	}
